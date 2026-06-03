@@ -5,8 +5,17 @@ on:
       - main
 
 jobs:
-  pr-vaildation:
-    runs-on: ubuntu-latest
-    steps:
-      - run: | 
-          echo "A comment is running!"
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout PR Branch
+      uses: actions/checkout@4
+      with:
+        ref: ${{ github.head_ref }}
+        fetch-depth: 0
+
+    - name: Check changing files
+      run: |
+        echo "Checking changes from source branch: ${{ github.head_ref }}"
+        echo "Target branch is: ${{ github.base_ref }}"
+        
+        git diff --name-only origin/${{ github.base_ref }}...HEAD
