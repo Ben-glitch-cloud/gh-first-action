@@ -1,6 +1,7 @@
-name: 'Pull Request Vaildation'
+name: Pull Request Check
 on:
   pull_request:
+    types: [opened]
     branches:
       - main
 
@@ -8,16 +9,16 @@ jobs:
   check-changes:
     runs-on: ubuntu-latest
 
-  steps:
-    - name: Checkout PR Branch
-      uses: actions/checkout@4
-      with:
-        ref: ${{ github.head_ref }}
-        fetch-depth: 0
+    steps:
+      - name: Checkout PR Branch
+        uses: actions/checkout@4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
 
-    - name: Check changing files
-      run: |
-        echo "Checking changes from source branch: ${{ github.head_ref }}"
-        echo "Target branch is: ${{ github.base_ref }}"
-        
-        git diff --name-only origin/${{ github.base_ref }}...HEAD
+      - name: Check changing files
+        run: |
+          echo "Checking changes from source branch: ${{ github.head_ref }}"
+          echo "Target branch is: ${{ github.base_ref }}"
+          
+          git diff --name-only origin/${{ github.base_ref }}...HEAD
