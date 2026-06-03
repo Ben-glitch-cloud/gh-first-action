@@ -5,7 +5,9 @@ on:
       - main
 
 jobs:
-  runs-on: ubuntu-latest
+  check-changes:
+    runs-on: ubuntu-latest
+
   steps:
     - name: Checkout PR Branch
       uses: actions/checkout@4
