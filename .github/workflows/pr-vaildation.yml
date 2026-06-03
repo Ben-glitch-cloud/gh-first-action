@@ -1,10 +1,11 @@
 name: 'Pull Request Vaildation'
 on:
-  issue_comment:
-    types: [created]
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  pr_commented:
+  pr-vaildation:
     runs-on: ubuntu-latest
     steps:
       - run: | 
